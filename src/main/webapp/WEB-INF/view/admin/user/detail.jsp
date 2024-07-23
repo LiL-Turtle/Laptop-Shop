@@ -14,6 +14,16 @@
                 <title>User Detail</title>
                 <link href="/css/styles.css" rel="stylesheet" />
                 <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+                <script>
+                    $(document).ready(() => {
+                        const avatarFile = $("#avatarFile");
+                        avatarFile.change(function (e) {
+                            const imgURL = URL.createObjectURL(e.target.files[0]);
+                            $("#avatarPreview").attr("src", imgURL);
+                            $("#avatarPreview").css({ "display": "block" });
+                        });
+                    });
+                </script>
             </head>
 
             <body class="sb-nav-fixed">
@@ -45,6 +55,10 @@
                                                     <li class="list-group-item">ID: ${user.id}</li>
                                                     <li class="list-group-item">Email: ${user.email} </li>
                                                     <li class="list-group-item">FullName: ${user.fullName}</li>
+                                                    <li class="list-group-item">Avatar: ${user.avatar}
+                                                        <img style="max-height: 250px; display: inline-block;"
+                                                            alt="avatar preview" id="avatarPreview" />
+                                                    </li>
                                                     <li class="list-group-item">Address: ${user.address}</li>
                                                     <li class="list-group-item">Phone: ${user.phone}</li>
                                                 </ul>
