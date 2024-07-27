@@ -11,7 +11,6 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
@@ -23,7 +22,7 @@ public class User {
     private long id;
 
     @NotNull
-    @Email(message = "Email không hợp lệ", regexp = "^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[azA-Z0-9.-]+$")
+    @Email(message = "Email không hợp lệ", regexp = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$")
     private String email;
 
     @NotNull
@@ -31,7 +30,7 @@ public class User {
     private String password;
 
     @NotNull
-    @Size(min = 3, message = "Fullname phải có ít nhất 3 ký tự")
+    @Size(min = 3, message = "Full Name phải có ít nhất 3 ký tự")
     private String fullName;
 
     private String address;

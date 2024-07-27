@@ -39,20 +39,31 @@
                                                     <label class="form-label">ID:</label>
                                                     <form:input type="text" class="form-control" path="id" />
                                                 </div>
+                                                <div class="mb-3" style="display: none">
+                                                    <label class="form-label">Password:</label>
+                                                    <form:input type="text" class="form-control" path="password" />
+                                                </div>
                                                 <div class="mb-3 col-12 col-md-6">
                                                     <label class="form-label">Email:</label>
                                                     <form:input type="email" class="form-control" path="email"
                                                         disabled="true" />
+                                                    <form:hidden path="email" />
                                                 </div>
                                                 <div class="mb-3 col-12 col-md-6">
                                                     <label class="form-label">Phone number:</label>
                                                     <form:input type="text" class="form-control" path="phone" />
                                                 </div>
                                                 <div class="mb-3 col-12">
+                                                    <c:set var="errorFullName">
+                                                        <form:errors path="fullName" cssClass="invalid-feedback" />
+                                                    </c:set>
                                                     <label class="form-label">Full Name:</label>
-                                                    <form:input type="text" class="form-control" path="fullName" />
+                                                    <form:input type="text"
+                                                        class="form-control ${not empty errorFullName ? 'is-invalid' : ''}"
+                                                        path="fullName" />
+                                                        ${errorFullName}
                                                 </div>
-
+                                                
                                                 <div class="mb-3 col-12">
                                                     <label class="form-label">Address:</label>
                                                     <form:input type="text" class="form-control" path="address" />
