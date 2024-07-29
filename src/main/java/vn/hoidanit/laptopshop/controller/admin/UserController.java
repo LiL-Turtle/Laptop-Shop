@@ -71,15 +71,15 @@ public class UserController {
     @PostMapping("/admin/user/create")
     public String createUserPage(Model model,
             @ModelAttribute("newUser") @Valid User hoidanit,
-            BindingResult newUserbindingResult,
+            BindingResult newUserBindingResult,
             @RequestParam("hoidanitFile") MultipartFile file) {
 
-        List<FieldError> errors = newUserbindingResult.getFieldErrors();
+        List<FieldError> errors = newUserBindingResult.getFieldErrors();
         for (FieldError error : errors) {
             System.out.println(error.getField() + " - " + error.getDefaultMessage());
         }
         // Validate
-        if (newUserbindingResult.hasErrors()) {
+        if (newUserBindingResult.hasErrors()) {
             return "admin/user/create";
         }
         //
