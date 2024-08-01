@@ -74,10 +74,6 @@ public class UserController {
             BindingResult newUserBindingResult,
             @RequestParam("hoidanitFile") MultipartFile file) {
 
-        List<FieldError> errors = newUserBindingResult.getFieldErrors();
-        for (FieldError error : errors) {
-            System.out.println(error.getField() + " - " + error.getDefaultMessage());
-        }
         // Validate
         if (newUserBindingResult.hasErrors()) {
             return "admin/user/create";

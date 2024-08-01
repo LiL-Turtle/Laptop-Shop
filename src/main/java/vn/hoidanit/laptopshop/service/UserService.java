@@ -7,6 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import vn.hoidanit.laptopshop.domain.Role;
 import vn.hoidanit.laptopshop.domain.User;
+import vn.hoidanit.laptopshop.domain.dto.RegisterDTO;
 import vn.hoidanit.laptopshop.repository.RoleRepository;
 import vn.hoidanit.laptopshop.repository.UserRepository;
 
@@ -43,7 +44,16 @@ public class UserService {
         this.userRepository.deleteUserById(id);
     }
 
-public Role getRoleByName(String name) { 
-    return this.roleRepository.findByName(name);
-}
+    public Role getRoleByName(String name) {
+        return this.roleRepository.findByName(name);
+    }
+
+    public User RegisterDTOtoUser(RegisterDTO registerDTO) {
+        User user = new User();
+
+        user.setFullName(registerDTO.getFirstName() + " " + registerDTO.getLastName());
+        user.setEmail(registerDTO.getEmail());
+        user.setPassword(registerDTO.getPassword());
+        return user;
+    }
 }
