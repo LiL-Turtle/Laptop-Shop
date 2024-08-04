@@ -1,0 +1,22 @@
+{"properties": [
+  {
+    "name": "strictHttpFirewall.setAllowedHttpMethods(Arrays.asList(\"GET\",\"POST\",\"DELETE\",",
+    "type": "java.lang.String",
+    "description": "A description for 'strictHttpFirewall.setAllowedHttpMethods(Arrays.asList(\"GET\",\"POST\",\"DELETE\",'"
+  },
+  {
+    "name": "strictHttpFirewall.setAllowedHttpMethods(Arrays.asList(\"GET\",\"POST\",\"DELETE\",",
+    "type": "java.lang.String",
+    "description": "A description for 'strictHttpFirewall.setAllowedHttpMethods(Arrays.asList(\"GET\",\"POST\",\"DELETE\",'"
+  },
+  {
+    "name": "strictHttpFirewall.setAllowBackSlash(true);",
+    "type": "java.lang.String",
+    "description": "A description for 'strictHttpFirewall.setAllowBackSlash(true);'"
+  },
+  {
+    "name": "strictHttpFirewall.setAllowBackSlash(true)",
+    "type": "java.lang.String",
+    "description": "A description for 'strictHttpFirewall.setAllowBackSlash(true)'"
+  }
+]}
