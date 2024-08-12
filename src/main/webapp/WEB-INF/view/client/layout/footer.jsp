@@ -6,9 +6,9 @@
                 <div class="pb-4 mb-4" style="border-bottom: 1px solid rgba(226, 175, 24, 0.5) ;">
                     <div class="row g-4">
                         <div class="col-lg-3">
-                            <a href="https://hoidanit.vn" target="_blank">
+                            <a href="https://web.facebook.com/b.thi3n" target="_blank">
                                 <h1 class="text-primary mb-0">Laptopshop</h1>
-                                <p class="text-secondary mb-0">@hoidanit</p>
+                                <p class="text-secondary mb-0" class="ti-facebook">Facebook: Bảo Thiên</p>
                             </a>
                         </div>
                     </div>
@@ -36,8 +36,9 @@
                     <div class="col-lg-3 col-md-6">
                         <div class="footer-item">
                             <h4 class="text-light mb-3">Contact</h4>
-                            <p>Author:Hỏi Dân IT</p>
-                            <p>Website: <a href="https://hoidanit.vn" target="_blank"> hoidanit.vn</a></p>
+                            <p>Author: Bảo Thiên</p>
+                            <p>Website: <a href="https://www.threads.net/@lonely.ston1e?hl=vi"
+                                    target="_blank">DevKing</a></p>
                         </div>
                     </div>
                 </div>
@@ -50,8 +51,8 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
-                        <span class="text-light"><a href="https://hoidanit.vn" target="_blank"><i
-                                    class="fas fa-copyright text-light me-2"></i>Hỏi Dân IT</a>, All right
+                        <span class="text-light"><a href="https://www.instagram.com/lonely.ston1e/" target="_blank"><i
+                                    class="fas fa-copyright text-light me-2"></i>Bảo Thiên</a>, All right
                             reserved.</span>
                     </div>
                     <div class="col-md-6 my-auto text-center text-md-end text-white">
