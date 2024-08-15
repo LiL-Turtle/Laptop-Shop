@@ -93,4 +93,9 @@ public class ProductService {
             }
         }
     }
+
+    // Đáng ra là có CartService
+    public Cart fetchByUser(User user) {
+        return this.cartRepository.findByUser(user);
+    }
 }

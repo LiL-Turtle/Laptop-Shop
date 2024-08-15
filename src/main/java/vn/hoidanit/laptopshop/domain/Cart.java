@@ -29,7 +29,7 @@ public class Cart {
 
     // cart_detail_id
     @OneToMany(mappedBy = "cart")
-    List<CartDetail> cartDetails;
+    List<CartDetail> cartDetails;   
 
     public long getId() {
         return id;
