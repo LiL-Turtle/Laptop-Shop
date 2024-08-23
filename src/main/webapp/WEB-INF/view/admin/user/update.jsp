@@ -45,8 +45,8 @@
                                                 </div>
                                                 <div class="mb-3 col-12 col-md-6">
                                                     <label class="form-label">Email:</label>
-                                                    <form:input type="email" class="form-control" path="email"
-                                                        disabled="true" />
+                                                    <form:input type="email" class="form-control" disabled="true"
+                                                        path="email" />
                                                     <form:hidden path="email" />
                                                 </div>
                                                 <div class="mb-3 col-12 col-md-6">
@@ -61,9 +61,9 @@
                                                     <form:input type="text"
                                                         class="form-control ${not empty errorFullName ? 'is-invalid' : ''}"
                                                         path="fullName" />
-                                                        ${errorFullName}
+                                                    ${errorFullName}
                                                 </div>
-                                                
+
                                                 <div class="mb-3 col-12">
                                                     <label class="form-label">Address:</label>
                                                     <form:input type="text" class="form-control" path="address" />
