@@ -47,7 +47,8 @@
                                                         <tr>
                                                             <th>${order.id}</th>
                                                             <td>
-                                                                <fmt:formatNumber value="${order.totalPrice}" />
+                                                                <fmt:formatNumber type="number"
+                                                                    value="${order.totalPrice}" />
                                                                 đ
                                                             </td>
                                                             <td>${order.receiverName}</td>
