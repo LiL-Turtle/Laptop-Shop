@@ -53,29 +53,7 @@ public class HomePageController {
         return "client/homepage/show";
     }
 
-    @GetMapping("/products")
-    public String getMethodName(Model model,
-            @RequestParam("page") Optional<String> pageOptional) {
-        int page = 1;
-        try {
-            if (pageOptional.isPresent()) {
-                page = Integer.parseInt(pageOptional.get());
-            } else {
-
-            }
-        } catch (Exception e) {
-
-        }
-
-        Pageable pageable = PageRequest.of(page - 1, 6);
-        Page<Product> products = productService.fetchProducts(pageable);
-        List<Product> listProducts = products.getContent();
-
-        model.addAttribute("products", listProducts);
-        model.addAttribute("currentPage", page);
-        model.addAttribute("totalPages", products.getTotalPages());
-        return "client/product/show";
-    }
+    
 
     @GetMapping("/register")
     public String getRegisterPage(Model model) {

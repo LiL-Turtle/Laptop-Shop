@@ -2,6 +2,7 @@ package vn.lil_turtle.laptopshop.service;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import jakarta.servlet.http.HttpSession;
@@ -10,6 +11,7 @@ import vn.lil_turtle.laptopshop.domain.CartDetail;
 import vn.lil_turtle.laptopshop.domain.Order;
 import vn.lil_turtle.laptopshop.domain.OrderDetail;
 import vn.lil_turtle.laptopshop.domain.Product;
+import vn.lil_turtle.laptopshop.domain.Product_;
 import vn.lil_turtle.laptopshop.domain.User;
 import vn.lil_turtle.laptopshop.repository.CartDetailRepository;
 import vn.lil_turtle.laptopshop.repository.CartRepository;
@@ -46,6 +48,14 @@ public class ProductService {
 
     public Product handleSaveProduct(Product product) {
         return this.productRepository.save(product);
+    }
+
+    private Specification<Product> nameLike(String name) {
+        return (root, query, criteriaBuilder) -> criteriaBuilder.like(root.get(Product_.NAME), "%" + name + "%");
+    }
+
+    public Page<Product> fetchProducts(Pageable page, String name) {
+        return this.productRepository.findAll(this.nameLike(name), page);
     }
 
     public Page<Product> fetchProducts(Pageable page) {
