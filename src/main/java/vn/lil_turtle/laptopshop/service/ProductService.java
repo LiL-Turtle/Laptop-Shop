@@ -11,13 +11,13 @@ import vn.lil_turtle.laptopshop.domain.CartDetail;
 import vn.lil_turtle.laptopshop.domain.Order;
 import vn.lil_turtle.laptopshop.domain.OrderDetail;
 import vn.lil_turtle.laptopshop.domain.Product;
-import vn.lil_turtle.laptopshop.domain.Product_;
 import vn.lil_turtle.laptopshop.domain.User;
 import vn.lil_turtle.laptopshop.repository.CartDetailRepository;
 import vn.lil_turtle.laptopshop.repository.CartRepository;
 import vn.lil_turtle.laptopshop.repository.OrderDetailRepository;
 import vn.lil_turtle.laptopshop.repository.OrderRepository;
 import vn.lil_turtle.laptopshop.repository.ProductRepository;
+import vn.lil_turtle.laptopshop.service.specification.ProductSpecs;
 
 import java.util.List;
 import java.util.Optional;
@@ -50,12 +50,83 @@ public class ProductService {
         return this.productRepository.save(product);
     }
 
-    private Specification<Product> nameLike(String name) {
-        return (root, query, criteriaBuilder) -> criteriaBuilder.like(root.get(Product_.NAME), "%" + name + "%");
-    }
+    // name
+    // public Page<Product> fetchProductsWithSpec(Pageable page, String name) {
+    // return this.productRepository.findAll(ProductSpecs.nameLike(name), page);
+    // }
 
-    public Page<Product> fetchProducts(Pageable page, String name) {
-        return this.productRepository.findAll(this.nameLike(name), page);
+    // min-price
+    // public Page<Product> fetchProductsWithSpec(Pageable page, double minPrice) {
+    // return this.productRepository.findAll(ProductSpecs.minPrice(minPrice), page);
+    // }
+
+    // max-price
+    // public Page<Product> fetchProductsWithSpec(Pageable page, double maxPrice) {
+    // return this.productRepository.findAll(ProductSpecs.maxPrice(maxPrice), page);
+    // }
+
+    // factory
+    // public Page<Product> fetchProductsWithSpec(Pageable page, String factory) {
+    // return this.productRepository.findAll(ProductSpecs.factory(factory), page);
+    // }
+
+    // listFactory
+    // public Page<Product> fetchProductsWithSpec(Pageable page, List<String>
+    // factory) {
+    // return this.productRepository.findAll(ProductSpecs.listFactory(factory),
+    // page);
+    // }
+
+    // price
+    // public Page<Product> fetchProductsWithSpec(Pageable page, String price) {
+    // if (price.equals("10-toi-15-trieu")) {
+    // double min = 10000000;
+    // double max = 15000000;
+    // return this.productRepository.findAll(ProductSpecs.price(min, max), page);
+    // } else if (price.equals("15-toi-30-trieu")) {
+    // double min = 15000000;
+    // double max = 30000000;
+    // return this.productRepository.findAll(ProductSpecs.price(min, max), page);
+    // } else {
+    // return this.productRepository.findAll(page);
+    // }
+    // }
+
+    // listPrice
+    public Page<Product> fetchProductsWithSpec(Pageable page, List<String> Price) {
+        Specification<Product> combinedSpec = (root, query, criteriaBuilder) -> criteriaBuilder.disjunction();
+        int count = 0;
+        for (String p : Price) {
+            double min = 0;
+            double max = 0;
+
+            switch (p) {
+                case "10-toi-15-trieu":
+                    min = 10000000;
+                    max = 15000000;
+                    count++;
+                    break;
+
+                case "15-toi-20-trieu":
+                    min = 15000000;
+                    max = 20000000;
+                    count++;
+                    break;
+                case "20-toi-30-trieu":
+                    min = 20000000;
+                    max = 30000000;
+                    count++;
+                    break;
+            }
+            if (min != 0 && max != 0) {
+                Specification<Product> rangeSpec = ProductSpecs.listPrice(min, max);
+                combinedSpec = combinedSpec.or(rangeSpec);
+            }
+        }
+        if (count == 0) {
+            return this.productRepository.findAll(page);
+        }
+        return this.productRepository.findAll(combinedSpec, page);
     }
 
     public Page<Product> fetchProducts(Pageable page) {

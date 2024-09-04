@@ -1,6 +1,7 @@
 package vn.lil_turtle.laptopshop.controller.client;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -152,7 +153,11 @@ public class ItemController {
     @GetMapping("/products")
     public String getMethodName(Model model,
             @RequestParam("page") Optional<String> pageOptional,
-            @RequestParam("name") Optional<String> nameOptional) {
+            @RequestParam("name") Optional<String> nameOptional,
+            @RequestParam("min-price") Optional<String> minPriceOptional,
+            @RequestParam("max-price") Optional<String> maxPriceOptional,
+            @RequestParam("factory") Optional<String> factoryOptional,
+            @RequestParam("price") Optional<String> priceOptional) {
         int page = 1;
         try {
             if (pageOptional.isPresent()) {
@@ -164,10 +169,37 @@ public class ItemController {
 
         }
 
-        String name = nameOptional.get();
+        Pageable pageable = PageRequest.of(page - 1, 60);
 
-        Pageable pageable = PageRequest.of(page - 1, 6);
-        Page<Product> products = productService.fetchProducts(pageable, name);
+        // String name = nameOptional.isPresent() ? nameOptional.get() : "";
+        // Page<Product> products = productService.fetchProductsWithSpec(pageable,
+        // name);
+
+        // double minPrice = minPriceOptional.isPresent() ?
+        // Double.parseDouble(minPriceOptional.get()) : 0;
+        // Page<Product> products = productService.fetchProductsWithSpec(pageable,
+        // minPrice);
+
+        // double maxPrice = maxPriceOptional.isPresent() ?
+        // Double.parseDouble(maxPriceOptional.get()) : 0;
+        // Page<Product> products = productService.fetchProductsWithSpec(pageable,
+        // maxPrice);
+
+        // String factory = factoryOptional.isPresent() ? factoryOptional.get() : "";
+        // Page<Product> products = productService.fetchProductsWithSpec(pageable,
+        // factory);
+
+        // List<String> factory = Arrays.asList(factoryOptional.get().split(","));
+        // Page<Product> products = productService.fetchProductsWithSpec(pageable,
+        // factory);
+
+        // String price = priceOptional.isPresent() ? priceOptional.get() : "";
+        // Page<Product> products = productService.fetchProductsWithSpec(pageable,
+        // price);
+
+        List<String> price = Arrays.asList(priceOptional.get().split(","));
+        Page<Product> products = productService.fetchProductsWithSpec(pageable, price);
+
         List<Product> listProducts = products.getContent();
 
         model.addAttribute("products", listProducts);
