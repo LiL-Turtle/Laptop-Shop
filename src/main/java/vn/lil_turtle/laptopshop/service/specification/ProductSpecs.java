@@ -15,30 +15,33 @@ public class ProductSpecs {
         return (root, query, criteriaBuilder) -> criteriaBuilder.like(root.get(Product_.NAME), "%" + name + "%");
     }
 
-    public static Specification<Product> minPrice(double minPrice) {
-        return (root, query, criteriaBuilder) -> criteriaBuilder.greaterThanOrEqualTo(root.get(Product_.PRICE),
-                minPrice);
+    public static Specification<Product> minPrice(double price) {
+        return (root, query, criteriaBuilder) -> criteriaBuilder.greaterThanOrEqualTo(root.get(Product_.PRICE), price);
     }
 
-    public static Specification<Product> maxPrice(double maxPrice) {
-        return (root, query, criteriaBuilder) -> criteriaBuilder.lessThanOrEqualTo(root.get(Product_.PRICE), maxPrice);
+    public static Specification<Product> maxPrice(double price) {
+        return (root, query, criteriaBuilder) -> criteriaBuilder.lessThanOrEqualTo(root.get(Product_.PRICE), price);
     }
 
-    public static Specification<Product> factory(String factoryOptional) {
-        return (root, query, criteriaBuilder) -> criteriaBuilder.equal(root.get(Product_.FACTORY), factoryOptional);
+    public static Specification<Product> matchFactory(String factory) {
+        return (root, query, criteriaBuilder) -> criteriaBuilder.equal(root.get(Product_.FACTORY), factory);
     }
 
-    public static Specification<Product> listFactory(List<String> factoryOptional) {
-        return (root, query, criteriaBuilder) -> criteriaBuilder.in(root.get(Product_.FACTORY)).value(factoryOptional);
+    public static Specification<Product> matchListFactory(List<String> factory) {
+        return (root, query, criteriaBuilder) -> criteriaBuilder.in(root.get(Product_.FACTORY)).value(factory);
     }
 
-    public static Specification<Product> price(double min, double max) {
+    public static Specification<Product> matchListTarget(List<String> target) {
+        return (root, query, criteriaBuilder) -> criteriaBuilder.in(root.get(Product_.TARGET)).value(target);
+    }
+
+    public static Specification<Product> matchPrice(double min, double max) {
         return (root, query, criteriaBuilder) -> criteriaBuilder.and(
                 criteriaBuilder.gt(root.get(Product_.PRICE), min),
                 criteriaBuilder.lt(root.get(Product_.PRICE), max));
     }
 
-    public static Specification<Product> listPrice(double min, double max) {
+    public static Specification<Product> matchMultiplePrice(double min, double max) {
         return (root, query, criteriaBuilder) -> criteriaBuilder.between(root.get(Product_.PRICE), min, max);
     }
 

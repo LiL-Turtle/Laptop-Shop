@@ -8,6 +8,7 @@ import java.util.Optional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,7 +22,9 @@ import jakarta.servlet.http.HttpSession;
 import vn.lil_turtle.laptopshop.domain.Cart;
 import vn.lil_turtle.laptopshop.domain.CartDetail;
 import vn.lil_turtle.laptopshop.domain.Product;
+import vn.lil_turtle.laptopshop.domain.Product_;
 import vn.lil_turtle.laptopshop.domain.User;
+import vn.lil_turtle.laptopshop.domain.dto.ProductCriteriaDTO;
 import vn.lil_turtle.laptopshop.service.ProductService;
 
 import org.springframework.web.bind.annotation.PostMapping;
@@ -152,59 +155,46 @@ public class ItemController {
 
     @GetMapping("/products")
     public String getMethodName(Model model,
-            @RequestParam("page") Optional<String> pageOptional,
-            @RequestParam("name") Optional<String> nameOptional,
-            @RequestParam("min-price") Optional<String> minPriceOptional,
-            @RequestParam("max-price") Optional<String> maxPriceOptional,
-            @RequestParam("factory") Optional<String> factoryOptional,
-            @RequestParam("price") Optional<String> priceOptional) {
+            ProductCriteriaDTO productCriteriaDTO,
+            HttpServletRequest request) {
         int page = 1;
         try {
-            if (pageOptional.isPresent()) {
-                page = Integer.parseInt(pageOptional.get());
+            if (productCriteriaDTO.getPage().isPresent()) {
+                page = Integer.parseInt(productCriteriaDTO.getPage().get());
             } else {
 
             }
         } catch (Exception e) {
+            // page = 1
+        }
+
+        // check sort price
+        Pageable pageable = PageRequest.of(page - 1, 3);
+        if (productCriteriaDTO.getSort() != null && productCriteriaDTO.getSort().isPresent()) {
+            String sort = productCriteriaDTO.getSort().get();
+            if (sort.equals("gia-tang-dan")) {
+                pageable = PageRequest.of(page - 1, 3, Sort.by(Product_.PRICE).ascending());
+            } else if (sort.equals("gia-giam-dan")) {
+                pageable = PageRequest.of(page - 1, 3, Sort.by(Product_.PRICE).descending());
+            }
 
         }
 
-        Pageable pageable = PageRequest.of(page - 1, 60);
+        Page<Product> products = this.productService.fetchProductsWithSpec(pageable, productCriteriaDTO);
 
-        // String name = nameOptional.isPresent() ? nameOptional.get() : "";
-        // Page<Product> products = productService.fetchProductsWithSpec(pageable,
-        // name);
+        List<Product> listProducts = products.getContent().size() > 0 ? products.getContent()
+                : new ArrayList<Product>();
 
-        // double minPrice = minPriceOptional.isPresent() ?
-        // Double.parseDouble(minPriceOptional.get()) : 0;
-        // Page<Product> products = productService.fetchProductsWithSpec(pageable,
-        // minPrice);
-
-        // double maxPrice = maxPriceOptional.isPresent() ?
-        // Double.parseDouble(maxPriceOptional.get()) : 0;
-        // Page<Product> products = productService.fetchProductsWithSpec(pageable,
-        // maxPrice);
-
-        // String factory = factoryOptional.isPresent() ? factoryOptional.get() : "";
-        // Page<Product> products = productService.fetchProductsWithSpec(pageable,
-        // factory);
-
-        // List<String> factory = Arrays.asList(factoryOptional.get().split(","));
-        // Page<Product> products = productService.fetchProductsWithSpec(pageable,
-        // factory);
-
-        // String price = priceOptional.isPresent() ? priceOptional.get() : "";
-        // Page<Product> products = productService.fetchProductsWithSpec(pageable,
-        // price);
-
-        List<String> price = Arrays.asList(priceOptional.get().split(","));
-        Page<Product> products = productService.fetchProductsWithSpec(pageable, price);
-
-        List<Product> listProducts = products.getContent();
+        String qs = request.getQueryString();
+        if (qs != null && !qs.isBlank()) {
+            // remove page
+            qs = qs.replace("page=" + page, "");
+        }
 
         model.addAttribute("products", listProducts);
         model.addAttribute("currentPage", page);
         model.addAttribute("totalPages", products.getTotalPages());
+        model.addAttribute("queryString", qs);
         return "client/product/show";
     }
 
