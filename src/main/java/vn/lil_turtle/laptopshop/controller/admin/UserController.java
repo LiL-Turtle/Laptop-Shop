@@ -123,7 +123,8 @@ public class UserController {
 
     @PostMapping("admin/user/update")
     public String postUpdateUser(Model model, @ModelAttribute("newUser") @Valid User hoidanit,
-            BindingResult newUserBindingResult) {
+            BindingResult newUserBindingResult,
+            @RequestParam("baothienFile") MultipartFile file) {
         List<FieldError> errors = newUserBindingResult.getFieldErrors();
         for (FieldError error : errors) {
             System.out.println(error.getField() + " - " + error.getDefaultMessage());
@@ -135,6 +136,10 @@ public class UserController {
         //
         User currentUser = this.userService.getUserById(hoidanit.getId());
         if (currentUser != null) {
+            if (!file.isEmpty()) {
+                String img = this.uploadService.handleSaveUpLoadFile(file, "avatar");
+                currentUser.setAvatar(img);
+            }
             currentUser.setFullName(hoidanit.getFullName());
             currentUser.setAddress(hoidanit.getAddress());
             currentUser.setPhone(hoidanit.getPhone());

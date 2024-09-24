@@ -9,7 +9,7 @@
 		<relativePath/>
 		<!-- lookup parent from repository -->
 	</parent>
-	<groupId>vn.hoidanit</groupId>	<!--Tên miền website duy nhất dành cho dự án-->
+	<groupId>vn.lil_turtle</groupId>	<!--Tên miền website duy nhất dành cho dự án-->
 	<artifactId>laptopshop</artifactId>	<!--tên dự án-->
 	<version>0.0.1-SNAPSHOT</version>	<!--Phiên bản phát triển phần mềm-->
 	<name>laptopshop</name>

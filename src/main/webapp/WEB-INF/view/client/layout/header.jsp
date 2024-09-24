@@ -41,7 +41,7 @@
                                                 <c:out value="${sessionScope.fullName}" />
                                             </div>
                                         </li>
-                                        <li><a class="dropdown-item" href="#">Quản lý tài khoản</a></li>
+                                        <li><a class="dropdown-item" href="/my-account">Quản lý tài khoản</a></li>
                                         <li><a class="dropdown-item" href="/order-history">Lịch sử mua hàng</a></li>
                                         <li>
                                             <hr class="dropdown-divider">

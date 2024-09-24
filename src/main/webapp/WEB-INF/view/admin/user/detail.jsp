@@ -52,13 +52,13 @@
                                                     User information
                                                 </div>
                                                 <ul class="list-group list-group-flush">
-                                                        <img class="card-img-top" src="/images/avatar/${user.avatar}"
-                                                            alt="Card image cap">
-                                                        <li class="list-group-item">ID: ${user.id}</li>
-                                                        <li class="list-group-item">Email: ${user.email} </li>
-                                                        <li class="list-group-item">FullName: ${user.fullName}</li>
-                                                        <li class="list-group-item">Address: ${user.address}</li>
-                                                        <li class="list-group-item">Phone: ${user.phone}</li>
+                                                    <img class="card-img-top" src="/images/avatar/${user.avatar}"
+                                                        alt="Card image cap" style=" max-width: 200px; height: auto;">
+                                                    <li class="list-group-item">ID: ${user.id}</li>
+                                                    <li class="list-group-item">Email: ${user.email} </li>
+                                                    <li class="list-group-item">FullName: ${user.fullName}</li>
+                                                    <li class="list-group-item">Address: ${user.address}</li>
+                                                    <li class="list-group-item">Phone: ${user.phone}</li>
                                                 </ul>
                                             </div>
                                             <a href="/admin/user" class="btn btn-success mt-3">Back</a>

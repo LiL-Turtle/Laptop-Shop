@@ -13,8 +13,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -22,8 +20,6 @@ import jakarta.validation.Valid;
 import vn.lil_turtle.laptopshop.domain.Product;
 import vn.lil_turtle.laptopshop.service.ProductService;
 import vn.lil_turtle.laptopshop.service.UploadService;
-
-import org.springframework.web.bind.annotation.RequestBody;
 
 @Controller
 public class ProductController {
@@ -102,7 +98,7 @@ public class ProductController {
         Product currentProduct = this.productService.getProductById(id);
         model.addAttribute("id", id);
         model.addAttribute("currentProduct", currentProduct);
-        return "/admin/product/update";
+        return "admin/product/update";
     }
 
     @PostMapping("/admin/product/update")

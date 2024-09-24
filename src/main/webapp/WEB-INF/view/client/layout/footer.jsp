@@ -23,7 +23,7 @@
                     <div class="col-lg-3 col-md-6">
                         <div class="d-flex flex-column text-start footer-item">
                             <h4 class="text-light mb-3">Shop Info</h4>
-                            <a class="btn-link" href="https://web.facebook.com/b.thi3n" target="_blank">About Us</a>
+                            <a class="btn-link" href="/about-us">About Us</a>
 
                         </div>
                     </div>
